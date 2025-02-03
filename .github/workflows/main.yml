@@ -25,8 +25,11 @@ jobs:
           cmake .. -DLLAMA_BUILD_SERVER=ON -DCMAKE_BUILD_TYPE=Release
           cmake --build . --config Release
 
-      - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload Build Artifacts (llama-server + libllama.so + libggml.so)
+        uses: actions/upload-artifact@v4  # Ensure you are using v4
         with:
-          name: llama-server
-          path: llama.cpp/build/
+          name: llama-build
+          path: |
+            llama.cpp/build/bin/llama-server
+            llama.cpp/build/bin/libllama.so
+            llama.cpp/build/bin/libggml.so
