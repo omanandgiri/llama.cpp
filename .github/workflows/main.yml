@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -17,12 +17,12 @@ jobs:
       - name: Install Dependencies
         run: sudo apt update && sudo apt install -y git cmake g++ build-essential
 
-      - name: Clone llama.cpp
+      - name: Build llama.cpp with Static GLIBC
         run: |
           git clone https://github.com/ggerganov/llama.cpp.git
           cd llama.cpp
           mkdir build && cd build
-          cmake .. -DLLAMA_BUILD_SERVER=ON -DCMAKE_BUILD_TYPE=Release
+          cmake .. -DLLAMA_BUILD_SERVER=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS="-static-libstdc++ -static-libgcc"
           cmake --build . --config Release
 
       - name: Upload Build Artifacts (llama-server + libllama.so + libggml.so)
