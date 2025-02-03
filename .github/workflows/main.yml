@@ -9,11 +9,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Reset GitHub Runner
-        run: |
-          sudo apt-get update
-          sudo apt-get upgrade -y
-
       - name: Install Dependencies
         run: sudo apt update && sudo apt install -y git cmake g++ build-essential
 
@@ -25,8 +20,8 @@ jobs:
           cmake .. -DLLAMA_BUILD_SERVER=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS="-static-libstdc++ -static-libgcc"
           cmake --build . --config Release
 
-      - name: Upload Build Artifacts (llama-server + libllama.so + libggml.so)
-        uses: actions/upload-artifact@v4  # Ensure you are using v4
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
         with:
           name: llama-build
           path: llama.cpp/build/
