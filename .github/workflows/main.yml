@@ -1,4 +1,4 @@
-name: Build llama-server
+name: Build main llama-server
 
 on: [push, pull_request]
 
@@ -24,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: llama-server
-          path: llama.cpp/build/bin/llama-server
+          path: llama.cpp/build/
