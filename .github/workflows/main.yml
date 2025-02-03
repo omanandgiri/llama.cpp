@@ -29,7 +29,4 @@ jobs:
         uses: actions/upload-artifact@v4  # Ensure you are using v4
         with:
           name: llama-build
-          path: |
-            llama.cpp/build/bin/llama-server
-            llama.cpp/build/bin/libllama.so
-            llama.cpp/build/bin/libggml.so
+          path: llama.cpp/build/
